@@ -14,7 +14,7 @@ export class VonageService {
     return new OpenTok(vonageApiKey, vonageSecret);
   }
 
-  createSession(): OpenTok.Session {
+  createSession(): string {
     const opentok: OpenTok = this.generateOpentok();
     let sessionObj: OpenTok.Session
     opentok.createSession({ mediaMode: "routed" }, (err, session: OpenTok.Session) => {
@@ -22,7 +22,7 @@ export class VonageService {
     
       sessionObj = session
     });
-    return sessionObj
+    return sessionObj.sessionId
   }
 
   generateToken(sesssionId: string, role: OpenTok.Role): string {

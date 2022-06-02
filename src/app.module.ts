@@ -5,6 +5,7 @@ import { PostModule } from './post/post.module';
 import { AppService } from './app.service'
 import { ConfigModule } from '@nestjs/config';
 import { VonageService } from './vonage/vonage.service';
+import { CampaignModule } from './campaign/campaign.module';
 
 @Module({
   imports: [
@@ -12,7 +13,8 @@ import { VonageService } from './vonage/vonage.service';
     PostModule,
     ConfigModule.forRoot({
       isGlobal: true,
-    })],
+    }),
+    CampaignModule],
   controllers: [AppController],
   providers: [AppService, VonageService],
 })
