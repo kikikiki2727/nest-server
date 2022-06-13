@@ -7,18 +7,18 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { CampaignService } from "./campaign.service";
+import { CampaignRepository } from "./campaign.repository";
 import { Campaign } from '@prisma/client';
 
 @Controller('campaign')
 export class CampaignController {
   constructor(
-    private readonly campaignService: CampaignService
+    private readonly campaignRepository: CampaignRepository
   ) {}
 
   @Post()
   async create(): Promise<string> {
-    const campaign = await this.campaignService.create();
+    const campaign = await this.campaignRepository.create();
     return campaign.sessionId;
   }
 
@@ -26,6 +26,6 @@ export class CampaignController {
   async getCampaignById(
     @Param('id') id: string
   ): Promise<Campaign> {
-    return await this.campaignService.getCampaignById(Number(id))
+    return await this.campaignRepository.getCampaignById(Number(id))
   }
 }

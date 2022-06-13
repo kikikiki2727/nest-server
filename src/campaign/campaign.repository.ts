@@ -4,7 +4,7 @@ import { VonageService } from '../vonage/vonage.service';
 import { Campaign } from '@prisma/client';
 
 @Injectable()
-export class CampaignService {
+export class CampaignRepository {
   constructor(
     private prisma: PrismaService,
     private vonage: VonageService,
