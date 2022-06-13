@@ -25,3 +25,8 @@ model Post {
   author    User?    @relation(fields: [authorId], references: [id])
   authorId  Int?
 }
+
+model Campaign {
+  id Int @default(autoincrement()) @id
+  sessionId String
+}
