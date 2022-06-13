@@ -25,9 +25,9 @@ export class VonageService {
     return sessionObj.sessionId
   }
 
-  generateToken(sesssionId: string, role: OpenTok.Role): string {
+  generateToken(sessionId: string, role: OpenTok.Role): string {
     const opentok: OpenTok = this.generateOpentok();
-    const token: string = opentok.generateToken(sesssionId, {
+    const token: string = opentok.generateToken(sessionId, {
       role: role,
       expireTime: new Date().getTime() / 1000 + 7 * 24 * 60 * 60, // in one week
     });
