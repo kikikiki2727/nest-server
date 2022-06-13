@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import OpenTok from "opentok"
+// import OpenTok from "opentok";
+import OpenTok = require('opentok');
 import { ConfigService } from '@nestjs/config'
 
 @Injectable()
@@ -14,15 +15,20 @@ export class VonageService {
     return new OpenTok(vonageApiKey, vonageSecret);
   }
 
-  createSession(): string {
+  async createSession(): Promise<string> {
     const opentok: OpenTok = this.generateOpentok();
-    let sessionObj: OpenTok.Session
-    opentok.createSession({ mediaMode: "routed" }, (err, session: OpenTok.Session) => {
-      if (err) return console.log(err);
-    
-      sessionObj = session
-    });
-    return sessionObj.sessionId
+    return await new Promise((resolve) => {
+      opentok.createSession({ mediaMode: "routed" }, (err, session: OpenTok.Session) => {
+        if (err) return console.log(err);
+      
+        resolve(session)
+      });
+    }).then((session: OpenTok.Session) => {
+      return session.sessionId
+    }).catch((e) => {
+      console.log(e)
+      throw Error
+    })
   }
 
   generateToken(sessionId: string, role: OpenTok.Role): string {

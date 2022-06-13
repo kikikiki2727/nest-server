@@ -11,7 +11,7 @@ export class CampaignRepository {
   ) {}
 
   async create(): Promise<Campaign> {
-    const sessionId = this.vonage.createSession();
+    const sessionId = await this.vonage.createSession();
     return this.prisma.campaign.create({
       data: {
         sessionId

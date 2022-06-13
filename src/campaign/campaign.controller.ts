@@ -17,9 +17,8 @@ export class CampaignController {
   ) {}
 
   @Post()
-  async create(): Promise<string> {
-    const campaign = await this.campaignRepository.create();
-    return campaign.sessionId;
+  async create(): Promise<Campaign> {
+    return await this.campaignRepository.create();
   }
 
   @Get(':id')
