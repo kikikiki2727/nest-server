@@ -33,9 +33,11 @@ export class VonageService {
 
   generateToken(sessionId: string, role: OpenTok.Role): string {
     const opentok: OpenTok = this.generateOpentok();
+    const oneWeekSeconds = 7 * 24 * 60 * 60;
+    const NumberForConvertToSeconds = 1000;
     const token: string = opentok.generateToken(sessionId, {
       role: role,
-      expireTime: new Date().getTime() / 1000 + 7 * 24 * 60 * 60, // in one week
+      expireTime: new Date().getTime() / NumberForConvertToSeconds + oneWeekSeconds,
     });
     return token
   }
