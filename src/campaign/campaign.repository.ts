@@ -26,4 +26,8 @@ export class CampaignRepository {
       }
     })
   }
+
+  async getCampaignList(): Promise<Campaign[]> {
+    return this.prisma.campaign.findMany()
+  }
 }

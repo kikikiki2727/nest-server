@@ -21,6 +21,11 @@ export class CampaignController {
     return await this.campaignRepository.create();
   }
 
+  @Get('list')
+  async getCampaignList(): Promise<Campaign[]> {
+    return await this.campaignRepository.getCampaignList()
+  }
+
   @Get(':id')
   async getCampaignById(
     @Param('id') id: string
